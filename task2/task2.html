@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <h3>污染城市列表</h3>
+  <ul id="aqi-list">
+<!--   
+    <li>第一名：福州（样例），10</li>
+      <li>第二名：福州（样例），10</li> -->
+  </ul>
+
+<script type="text/javascript">
+
+var aqiData = [
+  ["北京", 90],
+  ["上海", 50],
+  ["福州", 10],
+  ["广州", 50],
+  ["成都", 90],
+  ["西安", 100]
+];
+
+(function () {
+
+  /*
+  在注释下方编写代码
+  遍历读取aqiData中各个城市的数据
+  将空气质量指数大于60的城市显示到aqi-list的列表中
+  */
+ //
+ //方法一
+ //
+  	/*var cont=document.getElementById("aqi-list");
+  	var list=new Array();
+  	var j=0;
+  	//得到大于60的城市
+  	//alert(aqiData[1][1])
+  	for(var i=0;i<aqiData.length;i++) {
+  		if(aqiData[i][1]>60) {
+  		list[j]=aqiData[i];
+  		j++;
+  		};
+  	};
+  	//js数组排序sort 按照字符编码的顺序进行排序
+  	//function NumAscSort(a,b)
+	//{
+	// return a - b;
+	//}
+	//function NumDescSort(a,b)
+	//{
+	// return b - a;
+	//}
+  	//若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。
+	// 若 a 等于 b，则返回 0。
+	// 若 a 大于 b，则返回一个大于 0 的值。
+  	list.sort(function(x,y){
+    return x[1]-y[1];
+  });
+  	//降序
+  	list.reverse();
+  	//动态创建多个li,将其添加到ul
+  	for (var m = 0; m <= list.length; m++) {
+  		var newNode=document.createElement("li");
+  		 newNode.innerHTML="第"+(m+1)+"名："+list[m][0]+"，得分："+list[m][1];
+  		 cont.appendChild(newNode);
+  	};*/
+//
+//方法二
+//
+	var cont=document.querySelector("#aqi-list");
+		//[].filter() 创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。
+		//不会对空数组进行检测
+		//array.filter(function(currentValue 当前元素的值,index 元素索引,arr 数组对象), thisValue 相当于this)
+	  	var list=aqiData.filter(function(item){
+	  		return(item[1]>=60);
+	  	});
+	  	 list.sort(function(a,b){
+	  	 	return b[1]-a[1];
+	  	 });
+	  	 
+		 list.forEach(
+		 	function(item,index,array){
+				var newnode=document.createElement("li");
+				newnode.innerHTML=array[index][0]+":"+array[index][1];
+				cont.appendChild(newnode);
+			  
+			}
+		);
+
+})();
+
+</script>
+</body>
+</html>

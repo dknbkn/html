@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#outNum > li {
+			display: inline-block;
+			background-color: red;
+			color: white;
+			font-size: 20px;
+			margin: 5px;
+			padding: 5px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="num">
+	<button id="left_In">左侧入</button>
+	<button id="right_In">右侧入</button>
+	<button id="left_Out">左侧出</button>
+	<button id="right_Out">右侧出</button>
+	<ul id="outNum"></ul>
+	<script>
+		var num=document.getElementById("num");
+		var left_In=document.getElementById("left_In");
+		var right_In=document.getElementById("right_In");
+		var outNum=document.getElementById("outNum");
+		var left_Out=document.getElementById("left_Out");
+		var right_Out=document.getElementById("right_Out");
+		//判断数据是否为数值,根据参数判断左进还是右进
+		function insertNum(discription) {
+			if (num.value==""||num.value==null) {
+				alert("不能为空");
+			}
+			else if(isNaN(num.value)) {
+				alert ("应该为数值");
+			}
+			else {
+				var newNode=document.createElement("li");
+					newNode.innerHTML=num.value;
+				if(discription==="left") {
+					outNum.insertBefore(newNode,outNum.firstChild);
+				}
+				else if(discription==="right") {
+					outNum.appendChild(newNode);
+				}
+			}
+		}
+		function deleteNum(discription) {
+			if (outNum.length <=0) {	alert("队列已经没有值了");}
+			else {
+				if (discription==="left") {
+					outNum.removeChild(outNum.childNodes[0]);
+				} else if(discription==="right") {
+					outNum.removeChild(outNum.lastChild);
+				}
+				
+			}
+		}
+		left_In.onclick=function() {
+			insertNum("left");
+		};
+		right_In.onclick=function() {
+			insertNum("right");
+		};
+		left_Out.onclick=function() {
+			deleteNum("left");
+		};
+		right_Out.onclick=function() {
+			deleteNum("right");
+		};
+	</script>
+</body>
+</html>
